@@ -15,10 +15,6 @@ def best():
     speech_text = "Rishi is the best"
     return statement(speech_text).simple_card('Hi', speech_text)
 
-@ask.intent('Notification')
-def notification(notif)
-return statement('Smoker at pump 3')
-
 @ask.intent('AMAZON.HelpIntent')
 def help():
     return question("Please say something HELP")
