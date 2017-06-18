@@ -8,12 +8,7 @@ ask = Ask(app, '/')
 
 @ask.launch
 def launch():
-    return question("Say hello")
-
-@ask.intent('Hello')
-def hello(name):
-    speech_text = "Nice to meet you, {}".format(name)
-    return statement(speech_text).simple_card('Hi', speech_text)
+    return question("Welcome to BP Report.")
 
 @ask.intent('Best')
 def best():
@@ -35,18 +30,20 @@ def add(x, y):
 
 @ask.intent('Show')
 def show():
+    return statement("show")
     cap = cv2.VideoCapture(0)
+    
+    while True:
+        # Capture frame-by-frame
+        ret, frame = cap.read()
+        if not cap.isOpened(): print('Can\'t open cap')
+        if frame.empty(): break
 
-    # Capture frame-by-frame
-    ret, frame = cap.read()
+        # Our operations on the frame come here
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-    # Our operations on the frame come here
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-
-    # Display the resulting frame
-    cv2.imshow('frame', gray)
-    while (cv2.waitKey(1) & 0xFF) != ord('q'):
-        continue
+        # Display the resulting frame
+        cv2.imshow('frame', gray)
 
     # When everything done, release the capture
     cap.release()
@@ -59,24 +56,25 @@ def warn():
     return statement('No smoking allowed in this area')
 
 @ask.intent('Update')
-def update(location):
+def update(loc):
+    print("Location: {}".format(loc))
     #no = number of petrol station users
-    if location == 'station':
-        no = 2
+    if loc == 'station':
         pumpstatus = [False, True, False, True, False]
+
         #sm = number of smokers
-        occpumps = []
-        for pump in range(pumpstatus.len):
-          if pumpstatus[pump]:
-              occpumps.append(pump + 1)
-    if location == 'pump'
+        occpumps = "".join(["Pump {} {} occupied. ".format(i + 1, "" if val else "not") for (i, val) in enumerate(pumpstatus)])
+
+        return statement(occpumps)
+
+    if loc == 'pump':
         occ = True
         if occ:
             return statement('<speak>That  <prosody volume="x-loud">pump</prosody> is occupied</speak>')
         else:
-            "That pump is vacant"
+            return statement("That pump is vacant")
           
-    return statement('Currently, there are {} petrol station users and pumps {} are occupied.'.format(no, occpumps))
+    return statement("I don't know about this location")
 
 #REPLACE WITH PUSH NOTIFICATIONS
 
