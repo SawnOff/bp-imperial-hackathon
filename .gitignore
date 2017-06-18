@@ -13,3 +13,5 @@ pip-selfcheck.json
 .DS_Store
 /Dockerfile
 /__pycache__
+*.swp
+.env

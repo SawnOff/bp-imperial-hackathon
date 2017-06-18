@@ -39,19 +39,20 @@ def show():
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
     # Display the resulting frame
-    cv2.imshow('frame',gray)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+    cv2.imshow('frame', gray)
+    while (cv2.waitKey(1) & 0xFF) != ord('q'):
+        continue
 
-# When everything done, release the capture
-cap.release()
-cv2.destroyAllWindows()
-return statement('Camera session ended')
+    # When everything done, release the capture
+    cap.release()
+    cv2.destroyAllWindows()
+    return statement('Camera session ended')
 
 #REPLACE WITH PUSH NOTIFICATIONS
 @ask.intent('SmokeWarn')
 def warn():
     return statement('No smoking allowed in this area')
+
 @ask.intent('Update')
 def update():
     #no = number of petrol station users
@@ -59,10 +60,8 @@ def update():
     #sm = number of smokers
     sm = 0
     return statement('Currently, there are {} petrol station users, {} of them are smoking'.format(no, sm))
+
 #REPLACE WITH PUSH NOTIFICATIONS
-
-
-
 
 @ask.intent('AgeIntent', convert={'age': int})
 def say_age(age):
