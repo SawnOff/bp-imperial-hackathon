@@ -2,9 +2,13 @@ import numpy as np
 import cv2
 from flask import Flask
 from flask_ask import Ask, statement, question
+import pyaudio
+import wave
 
 app = Flask(__name__)
 ask = Ask(app, '/')
+
+chunk = 1024
 
 @ask.launch
 def launch():
@@ -30,9 +34,9 @@ def add(x, y):
 
 @ask.intent('Show')
 def show():
-    return statement("show")
+    return statement("ENHANCE")
     cap = cv2.VideoCapture(0)
-    
+
     while True:
         # Capture frame-by-frame
         ret, frame = cap.read()
@@ -73,7 +77,7 @@ def update(loc):
             return statement('<speak>That  <prosody volume="x-loud">pump</prosody> is occupied</speak>')
         else:
             return statement("That pump is vacant")
-          
+
     return statement("I don't know about this location")
 
 #REPLACE WITH PUSH NOTIFICATIONS
@@ -91,11 +95,25 @@ def say_age(age):
 
 @ask.intent('AMAZON.CancelIntent')
 def cancel():
-    return question("Please say something CANCEL")
+    return statement("")
 
 @ask.intent('AMAZON.StopIntent')
 def stop():
-    return question("Please say something STOP")
+    return statement("")
+
+def play_sound():
+    f = wave.open(r"smoker_alarm.wav", "rb")
+    p = pyaudio.PyAudio()
+    stream = p.open(format = p.get_format_from_width(f.getsampwidth()), channels = f.getnchannels(), rate = f.getframerate(), output = True)
+    data = f.readframes(chunk)
+    while data:
+        stream.write(data)
+        data = f.readframes(chunk)
+
+    stream.stop_stream()
+    stream.close()
+
+    p.terminate()
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
