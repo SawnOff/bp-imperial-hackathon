@@ -50,6 +50,22 @@ cap.release()
 cv2.destroyAllWindows()
 return statement('Camera session ended')
 
+#REPLACE WITH A PUSH NOTIFICATION
+@ask.intent('SmokeWarn')
+def warn():
+    return statement('No smoking allowed in this area')
+
+@ask.intent('AgeIntent', convert={'age': int})
+def say_age(age):
+    if 'age' in convert_errors:
+        # since age failed to convert, it keeps its string
+        # value (e.g. "?") for later interrogation.
+        return question("Can you please repeat your age?")
+
+    # conversion guaranteed to have succeeded
+    # age is an int
+    return statement("Your age is {}".format(age))
+
 @ask.intent('AMAZON.CancelIntent')
 def cancel():
     return statement("Cancelled")
