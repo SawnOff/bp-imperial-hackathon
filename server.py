@@ -54,12 +54,24 @@ def warn():
     return statement('No smoking allowed in this area')
 
 @ask.intent('Update')
-def update():
+def update(location):
     #no = number of petrol station users
-    no = 5
-    #sm = number of smokers
-    sm = 0
-    return statement('Currently, there are {} petrol station users, {} of them are smoking'.format(no, sm))
+    if location == 'station':
+        no = 2
+        pumpstatus = [False, True, False, True, False]
+        #sm = number of smokers
+        occpumps = []
+        for pump in range(pumpstatus.len):
+          if pumpstatus[pump]:
+              occpumps.append(pump + 1)
+    if location == 'pump'
+        occ = True
+        if occ:
+            return "That pump is occupied"
+        else:
+            "That pump is vacant"
+          
+    return statement('Currently, there are {} petrol station users and pumps {} are occupied.'.format(no, occpumps))
 
 #REPLACE WITH PUSH NOTIFICATIONS
 
