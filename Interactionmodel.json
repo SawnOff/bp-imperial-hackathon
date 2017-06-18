@@ -1,0 +1,54 @@
+{
+  "intents": [
+    {
+      "name": "AgeIntent",
+      "samples": [],
+      "slots": []
+    },
+    {
+      "name": "AMAZON.CancelIntent",
+      "samples": []
+    },
+    {
+      "name": "AMAZON.HelpIntent",
+      "samples": []
+    },
+    {
+      "name": "AMAZON.StopIntent",
+      "samples": []
+    },
+    {
+      "name": "Best",
+      "samples": [
+        "Who is the best"
+      ],
+      "slots": []
+    },
+    {
+      "name": "Show",
+      "samples": [
+        "Show me",
+        "What's going on outside",
+        "Show"
+      ],
+      "slots": []
+    },
+    {
+      "name": "Update",
+      "samples": [
+        "Update me",
+        "Status update",
+        "What's going on outside",
+        "Update me on {Location} ",
+        "What's going on at {Location} "
+      ],
+      "slots": [
+        {
+          "name": "Location",
+          "type": "AMAZON.NUMBER",
+          "samples": []
+        }
+      ]
+    }
+  ]
+}
