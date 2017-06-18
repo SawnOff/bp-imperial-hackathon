@@ -28,7 +28,6 @@
       "name": "Show",
       "samples": [
         "Show me",
-        "What's going on outside",
         "Show"
       ],
       "slots": []
@@ -39,16 +38,85 @@
         "Update me",
         "Status update",
         "What's going on outside",
-        "Update me on {Location} ",
-        "What's going on at {Location} "
+        "Update me on {loc} ",
+        "What's going on at {loc} "
       ],
       "slots": [
         {
-          "name": "Location",
-          "type": "AMAZON.NUMBER",
+          "name": "loc",
+          "type": "location",
           "samples": []
         }
       ]
     }
-  ]
+  ],
+  "types": [
+    {
+      "name": "location",
+      "values": [
+        {
+          "name": {
+            "value": "pump"
+          }
+        },
+        {
+          "name": {
+            "value": "station"
+          }
+        }
+      ]
+    }
+  ],
+  "prompts": [
+    {
+      "id": "Elicit.Intent-Update.IntentSlot-loc",
+      "promptVersion": "1.0",
+      "definitionVersion": "1.0",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "Please specify a location"
+        }
+      ]
+    }
+  ],
+  "dialog": {
+    "version": "1.0",
+    "intents": [
+      {
+        "name": "AgeIntent",
+        "confirmationRequired": false,
+        "prompts": {},
+        "slots": []
+      },
+      {
+        "name": "Best",
+        "confirmationRequired": false,
+        "prompts": {},
+        "slots": []
+      },
+      {
+        "name": "Show",
+        "confirmationRequired": false,
+        "prompts": {},
+        "slots": []
+      },
+      {
+        "name": "Update",
+        "confirmationRequired": false,
+        "prompts": {},
+        "slots": [
+          {
+            "name": "loc",
+            "type": "location",
+            "elicitationRequired": true,
+            "confirmationRequired": false,
+            "prompts": {
+              "elicit": "Elicit.Intent-Update.IntentSlot-loc"
+            }
+          }
+        ]
+      }
+    ]
+  }
 }
