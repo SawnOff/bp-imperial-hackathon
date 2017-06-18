@@ -72,7 +72,7 @@ def update(location):
     if location == 'pump'
         occ = True
         if occ:
-            return "That pump is occupied"
+            return statement('<speak>That  <prosody volume="x-loud">pump</prosody> is occupied</speak>')
         else:
             "That pump is vacant"
           
