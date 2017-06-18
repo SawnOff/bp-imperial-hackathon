@@ -1,0 +1,3 @@
+[submodule "notification-curl"]
+	path = notification-curl
+	url = https://github.com/gravesjohnr/AlexaNotificationCurl.git
