@@ -50,10 +50,21 @@ cap.release()
 cv2.destroyAllWindows()
 return statement('Camera session ended')
 
-#REPLACE WITH A PUSH NOTIFICATION
+#REPLACE WITH PUSH NOTIFICATIONS
 @ask.intent('SmokeWarn')
 def warn():
     return statement('No smoking allowed in this area')
+@ask.intent('Update')
+def update():
+    #no = number of petrol station users
+    no = 5
+    #sm = number of smokers
+    sm = 0
+    return statement('Currently, there are {} petrol station users, {} of them are smoking'.format(no, sm))
+#REPLACE WITH PUSH NOTIFICATIONS
+
+
+
 
 @ask.intent('AgeIntent', convert={'age': int})
 def say_age(age):
