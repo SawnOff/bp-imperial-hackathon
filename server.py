@@ -15,6 +15,11 @@ def hello(name):
     speech_text = "Nice to meet you, {}".format(name)
     return statement(speech_text).simple_card('Hi', speech_text)
 
+@ask.intent('Best')
+def best():
+    speech_text = "Rishi is the best"
+    return statement(speech_text).simple_card('Hi', speech_text)
+
 @ask.intent('AMAZON.HelpIntent')
 def help():
     return question("Please say something HELP")
