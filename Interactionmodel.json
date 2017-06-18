@@ -5,6 +5,11 @@
       "samples": [],
       "slots": []
     },
+     {
+      "name": "Notifications",
+      "samples": [],
+      "slots": []
+    },
     {
       "name": "AMAZON.CancelIntent",
       "samples": []
